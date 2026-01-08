@@ -20,7 +20,8 @@ st.write(
 cnx = st.connection("snowflake")
 session = cnx.session()
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'))
+my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
+
 
 # display dataframe 
 # st.dataframe(data=my_dataframe, use_container_width=True)
@@ -50,7 +51,7 @@ INSERT INTO smoothies.public.orders (ingredients, name_on_order)
 VALUES ('{ingredients_string}', '{name_on_order}')
 """
 
-my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
+
 
 #Convert the snowpark dataframe to a pandas dataframe so we can use the LOC function 
 pd_df=my_dataframe.to_pandas()
