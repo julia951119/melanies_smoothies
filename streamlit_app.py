@@ -21,11 +21,6 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 
-#Convert the snowpark dataframe to a pandas dataframe so we can use the LOC function 
-pd_df=my_dataframe.to_pandas()
-st.dataframe(pd_df)
-st.stop()
-
 # display dataframe 
 # st.dataframe(data=my_dataframe, use_container_width=True)
 
@@ -55,6 +50,11 @@ VALUES ('{ingredients_string}', '{name_on_order}')
 """
 
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'), col('SEARCH_ON'))
+
+#Convert the snowpark dataframe to a pandas dataframe so we can use the LOC function 
+pd_df=my_dataframe.to_pandas()
+st.dataframe(pd_df)
+st.stop()
 #st.dataframe(data=my_dataframe,use_container_width=True),
 #st.stop()
 #st.text(smoothiefroot_response.json())
